@@ -1,0 +1,20 @@
+.container {
+	max-width: 960px;
+}
+  
+.lh-condensed { line-height: 1.25; }
+
+.form-sign-up{
+	width: 70%;
+	padding: 15px;
+	margin: auto;
+}
+
+
+.form-signin .form-control {
+	position: relative;
+	box-sizing: border-box;
+	height: auto;
+	padding: 10px;
+	font-size: 16px;
+  }
