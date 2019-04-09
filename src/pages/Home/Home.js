@@ -37,7 +37,7 @@ class Home extends Component {
 						{briefings.items &&
 							<div>
 								{briefings.items.map(briefing =>
-									<BriefingItem key={briefing.id_briefing} deleteBriefing={this.deleteBriefing} briefing={briefing} />
+									<BriefingItem key={briefing._id} deleteBriefing={this.deleteBriefing} briefing={briefing} />
 								)}
 							</div>
 						}

@@ -6,7 +6,7 @@ class BriefingItem extends Component {
 	render() {
 
 		const { briefing } = this.props;
-		const { id_briefing } = briefing;
+		const { _id } = briefing;
 		const time_goal = new Date(briefing.budget.time_goal).toLocaleDateString();
 		return (
 			<div className="card" style={{ marginTop: '20px' }}>
@@ -18,10 +18,10 @@ class BriefingItem extends Component {
 
 					<button className="btn btn-success" data-toggle="modal" data-target="#exampleModal"><span className="fas fa-eye"> </span> Visualizar </button>&nbsp;
 					<button className="btn btn-warning"><span className="fas fa-pencil-alt"> </span> Editar </button>&nbsp;
-					<button className="btn btn-danger" onClick={this.props.deleteBriefing.bind(this, id_briefing)}><span className="far fa-trash-alt"></span> Remover</button>
+					<button className="btn btn-danger" onClick={this.props.deleteBriefing.bind(this, _id)}><span className="far fa-trash-alt"></span> Remover</button>
 
 
-					<div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div className="modal-dialog" role="document">
 							<div className="modal-content">
 								<div className="modal-header">

@@ -22,12 +22,11 @@ function create(briefing){
 	});
 }
 
-function deleteBriefing(id_briefing){
-	const briefing = {id_briefing};
+function deleteBriefing(_id){
 	const requestOptions = {
 		method: 'DELETE',
 		headers: authHeader(),
-		body: JSON.stringify(briefing)
+		body: JSON.stringify({_id})
 	}
 
 	return fetch('/api/briefings', requestOptions)
