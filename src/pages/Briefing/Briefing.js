@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './style.css';
 import TagInput from '../../components/TagInput';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { briefingActions } from '../../actions';
 
 class Briefing extends Component {
@@ -34,9 +34,9 @@ class Briefing extends Component {
 	changetag = (tags) => {
 		var features = [];
 		tags.forEach(tag => {
-			features.push({ name: tag.text });
+			features.push(tag.text);
 		});
-		this.setState({ features});
+		this.setState({ features });
 	}
 
 	handleChange(e) {
@@ -58,7 +58,7 @@ class Briefing extends Component {
 				time_goal: briefing.time_goal,
 				cost: briefing.cost
 			}
-			
+
 			this.props.dispatch(briefingActions.create(briefing));
 		}
 
@@ -192,7 +192,7 @@ class Briefing extends Component {
 	}
 }
 
-const mapStateToProps = state =>{
+const mapStateToProps = state => {
 	const { briefings } = state;
 	return { briefings };
 }

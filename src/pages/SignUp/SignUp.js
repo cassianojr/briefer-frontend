@@ -14,8 +14,7 @@ class SignUp extends Component {
 		this.state = {
 			name: '',
 			email: '',
-			password: '',
-			post: ''
+			password: ''
 		}
 		this.onChange = this.onChange.bind(this);
 	}
@@ -74,13 +73,6 @@ class SignUp extends Component {
 							<input type="password" name="password"   value={this.state.password} onChange={this.onChange} className="form-control" id="password" required />
 							<div className="invalid-feedback">
 								Digite uma senha válida
-							</div>
-						</div>
-						<div className="col-md-12 mb-3">
-							<label htmlFor="post">Especialidade</label>
-							<input type="text" className="form-control"   value={this.state.post} onChange={this.onChange} name="post" id="post" required />
-							<div className="invalid-feedback">
-								Digite sua especialidade.
 							</div>
 						</div>
 						<hr></hr>
