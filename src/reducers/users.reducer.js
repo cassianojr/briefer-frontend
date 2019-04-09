@@ -1,8 +1,6 @@
 import { userConstants } from '../constants';
 
-const initialState = {};
-
-export function authentication(state = initialState, action) {
+export function users(state = {}, action) {
 	switch (action.type) {
 		case userConstants.CREATE_REQUEST:
 			return {
@@ -10,12 +8,26 @@ export function authentication(state = initialState, action) {
 				item: action.user
 			};
 		case userConstants.CREATE_SUCCESS:
-			return{
+			return {
 				create: true,
 				user: action.user
 			};
 		case userConstants.CREATE_FAILURE:
 			return {};
+		case userConstants.EMAIL_VERIFY_REQUEST:
+			return {
+				loading: true
+			}
+		case userConstants.EMAIL_EXISTS:
+			return {
+				exists: true,
+				email: action.email
+			}
+		case userConstants.EMAIL_NOT_EXISTS:
+			return {
+				exists: false,
+				email: action.email
+			}
 		default:
 			return state;
 	}

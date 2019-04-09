@@ -4,7 +4,8 @@ export const userService = {
 	login,
 	logout,
 	getAll,
-	create
+	create,
+	verifyIfEmailExists
 };
 
 function login(email, password) {
@@ -25,24 +26,32 @@ function login(email, password) {
 		});
 }
 
-function create(user){
+function verifyIfEmailExists(email) {
+	return fetch(`/api/users/user/email/${email}`)
+		.then(response => response.json())
+		.then(userFinded => {
+			return (userFinded != null);
+		});
+}
+
+function create(user) {
 	const requestOptions = {
 		method: 'POST',
-		headers: { 'Content-type':'application/json'},
+		headers: { 'Content-type': 'application/json' },
 		body: JSON.stringify(user)
 	}
 
 	return fetch('/api/users', requestOptions)
-	.then(user=>{
-		return user;
-	});
+		.then(user => {
+			return user;
+		});
 }
 
 function logout() {
 	localStorage.removeItem('user');
 }
 
-function getAll(){
+function getAll() {
 	const requestOptions = {
 		method: 'GET',
 		headers: authHeader()

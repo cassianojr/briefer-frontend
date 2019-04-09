@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
 import { briefingActions } from '../../actions';
+
 import BriefingItem from '../../components/BriefingItem';
 
 class Home extends Component {
@@ -25,6 +26,7 @@ class Home extends Component {
 
 	render() {
 		const { briefings } = this.props;
+		console.log(this.props);
 		return (
 			<div className="container">
 				{this.props.sidebar}
