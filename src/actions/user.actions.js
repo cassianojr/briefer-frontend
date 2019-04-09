@@ -4,7 +4,7 @@ import { history } from '../helpers';
 
 const login = (email, password) => dispatch => {
 	dispatch(request({ email }));
-	
+
 	userService.login(email, password)
 		.then(user => {
 			history.push('/');
@@ -18,21 +18,34 @@ const login = (email, password) => dispatch => {
 	function failure(user) { return { type: userConstants.LOGIN_FAILURE, user } }
 }
 
+const verifyIfEmailExists = (email) => dispatch => {
+	dispatch(request(email));
+
+	userService.verifyIfEmailExists(email)
+		.then(exists => {
+			dispatch((exists) ? emailExists(email) : emailNotExists(email));
+		});
+
+	function request(email) { return { type: userConstants.EMAIL_VERIFY_REQUEST, email } }
+	function emailExists(email) { return { type: userConstants.EMAIL_EXISTS, email } }
+	function emailNotExists(email) { return { type: userConstants.EMAIL_NOT_EXISTS, email } }
+}
+
 const logout = () => {
 	userService.logout();
 	return { type: userConstants.LOGOUT }
 }
 
-const create = (user) => dispatch =>{
+const create = (user) => dispatch => {
 	dispatch(request(user));
 
 	userService.create(user)
-	.then(user=>{
-		history.push('/');
-		dispatch(success(user));
-	}).catch(error=>{
-		dispatch(failure(error));
-	});
+		.then(user => {
+			history.push('/');
+			dispatch(success(user));
+		}).catch(error => {
+			dispatch(failure(error));
+		});
 
 	function request(user) { return { type: userConstants.CREATE_REQUEST, user } }
 	function success(user) { return { type: userConstants.CREATE_SUCCESS, user } }
@@ -42,5 +55,6 @@ const create = (user) => dispatch =>{
 export const userActions = {
 	login,
 	logout,
-	create
+	create,
+	verifyIfEmailExists
 };
