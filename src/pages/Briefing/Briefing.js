@@ -6,10 +6,8 @@ import { briefingActions } from '../../actions';
 
 class Briefing extends Component {
 
-	constructor(props) {
-		super(props);
-
-		this.state = {
+	static defaultProps = {
+		briefing: {
 			cl_name: '',
 			cl_phone: '',
 			cl_email: '',
@@ -26,9 +24,21 @@ class Briefing extends Component {
 			time_goal: '',
 			cost: '',
 			features: []
+		}
+	}
+
+	constructor(props) {
+		super(props);
+
+		this.state = {
+	
 		};
 
 		this.handleChange = this.handleChange.bind(this);
+	}
+
+	componentDidMount(){
+		this.setState(this.props.briefing);
 	}
 
 	changetag = (tags) => {
@@ -46,19 +56,16 @@ class Briefing extends Component {
 
 	onSubmit = (e) => {
 		var form = document.querySelector('.form-briefing');
-		if (form.checkValidity() === false) {
-			e.preventDefault();
-			e.stopPropagation();
-		} else {
-			e.preventDefault();
-			e.stopPropagation();
 
-			const briefing = this.state;
-			briefing.budget = {
-				time_goal: briefing.time_goal,
-				cost: briefing.cost
-			}
+		e.preventDefault();
+		e.stopPropagation();
 
+		const briefing = this.state;
+		briefing.budget = {
+			time_goal: briefing.time_goal,
+			cost: briefing.cost
+		}
+		if(form.checkValidity() !== false){
 			this.props.dispatch(briefingActions.create(briefing));
 		}
 

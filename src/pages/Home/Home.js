@@ -32,7 +32,7 @@ class Home extends Component {
 				{this.props.sidebar}
 				<div className="col-lg-11 float-right">
 					<h1 style={{textAlign: 'center'}}>Bem vindo {this.state.userName}</h1>
-					<a className="btn btn-primary col-lg-12" href="/briefing"><span className="fas fa-plus-circle"></span> Novo Briefing</a>
+					<a className="btn btn-primary col-lg-12" href="/new_briefing"><span className="fas fa-plus-circle"></span> Novo Briefing</a>
 					<div>
 						{briefings.loading && <em>Loading briefings...</em>}
 						{briefings.error && <span className="txt-danger">Error: {briefings.error}</span>}
