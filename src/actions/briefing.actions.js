@@ -15,29 +15,42 @@ const getAll = () => dispatch => {
 	function failure(error) { return { type: briefingConstants.GETALL_FAILURE, error } }
 }
 
-const create = (briefing)=> dispatch =>{
+const create = (briefing) => dispatch => {
 	dispatch(request(briefing));
 
 	briefingService.create(briefing)
-	.then(briefing=>{
-		dispatch(success(briefing));
-		history.push('/');
-	}).catch(error=> dispatch(failure(error)));
-	
+		.then(briefing => {
+			dispatch(success(briefing));
+			history.push('/');
+		}).catch(error => dispatch(failure(error)));
+
 	function request(briefing) { return { type: briefingConstants.CREATE_REQUEST, briefing } }
 	function success(briefing) { return { type: briefingConstants.CREATE_SUCCESS, briefing } }
 	function failure(error) { return { type: briefingConstants.CREATE_FAILURE, error } }
 }
 
-const deleteBriefing = (id_briefing)=>dispatch=>{
+const update = (briefing) => dispatch => {
+	dispatch(request(briefing));
+
+	briefingService.update(briefing)
+	.then(briefing => {
+		dispatch(success(briefing));
+	}).catch(error=> dispatch(failure(error)));
+
+	function request(briefing) { return { type: briefingConstants.UPDATE_REQUEST, briefing } }
+	function success(briefing) { return { type: briefingConstants.UPDATE_SUCCESS, briefing } }
+	function failure(error) { return { type: briefingConstants.UPDATE_FAILURE, error } }
+}
+
+const deleteBriefing = (id_briefing) => dispatch => {
 	dispatch(request(id_briefing));
 
 	briefingService.deleteBriefing(id_briefing)
-	.then(briefing=>{
-		dispatch(success(briefing));
-		history.push('/');
-	}).catch(error=> dispatch(failure(error)));
-	
+		.then(briefing => {
+			dispatch(success(briefing));
+			history.push('/');
+		}).catch(error => dispatch(failure(error)));
+
 	function request(id_briefing) { return { type: briefingConstants.DELETE_REQUEST, id_briefing } }
 	function success(id_briefing) { return { type: briefingConstants.DELETE_SUCCESS, id_briefing } }
 	function failure(error) { return { type: briefingConstants.DELETE_FAILURE, error } }
@@ -46,5 +59,6 @@ const deleteBriefing = (id_briefing)=>dispatch=>{
 export const briefingActions = {
 	getAll,
 	create,
+	update,
 	deleteBriefing
 }

@@ -27,7 +27,19 @@ export function briefings(state = {}, action) {
 			return {
 				success: false
 			};
-
+		case briefingConstants.UPDATE_REQUEST:
+			return {
+				loading: true
+			}
+		case briefingConstants.UPDATE_SUCCESS:
+			return {
+				success: true,
+				briefing: action.briefing
+			}
+		case briefingConstants.UPDATE_FAILURE:
+			return {
+				success: false
+			}
 		case briefingConstants.DELETE_REQUEST:
 			return {
 				loading: true

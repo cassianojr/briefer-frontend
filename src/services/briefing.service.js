@@ -22,6 +22,16 @@ function create(briefing){
 	});
 }
 
+function update(briefing){
+	const requestOptions ={
+		method: 'PUT',
+		headers: authHeader(),
+		body: JSON.stringify(briefing)
+	}
+
+	return fetch('/api/briefings', requestOptions).then(handleResponse);
+}
+
 function deleteBriefing(_id){
 	const requestOptions = {
 		method: 'DELETE',
@@ -50,5 +60,6 @@ function handleResponse(response) {
 export const briefingService ={
 	getAll,
 	create,
+	update,
 	deleteBriefing
 }
