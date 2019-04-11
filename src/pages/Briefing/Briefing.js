@@ -75,7 +75,7 @@ class Briefing extends Component {
 
 		return (
 			<div className="container">
-				{this.props.sidebar}
+				{/* {this.props.sidebar} */}
 
 				<div className="col-lg-11 float-right">
 					<h3 className="mb-3">Criar novo Briefing</h3>

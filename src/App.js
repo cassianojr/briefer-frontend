@@ -11,6 +11,7 @@ import { Home } from './pages/Home';
 import store from './Store';
 import { PrivateRoute } from './components/PrivateRoute';
 import { Briefing } from './pages/Briefing';
+import SideMenu from './components/layout/SideMenu';
 
 class App extends Component {
 
@@ -20,8 +21,9 @@ class App extends Component {
       <Provider store={store}>
         <Router history={history}>
           <div>
-            <PrivateRoute exact path="/" component={Home}/>
-            <PrivateRoute exact path="/new_briefing" component={Briefing}/>
+            <PrivateRoute exact path="/" component={SideMenu}/>
+            {/* <PrivateRoute exact path="/" component={Home}/>
+            <PrivateRoute exact path="/new_briefing" component={Briefing}/> */}
             <Route exact path="/login" component={SignIn} />
             <Route exact path="/sign-up" component={SignUp} />
           </div>

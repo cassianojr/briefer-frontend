@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
 import { briefingActions } from '../../actions';
+import {Link} from 'react-router-dom';
 
 import BriefingItem from '../../components/BriefingItem';
 
@@ -29,10 +30,9 @@ class Home extends Component {
 		console.log(this.props);
 		return (
 			<div className="container">
-				{this.props.sidebar}
 				<div className="col-lg-11 float-right">
 					<h1 style={{textAlign: 'center'}}>Bem vindo {this.state.userName}</h1>
-					<a className="btn btn-primary col-lg-12" href="/new_briefing"><span className="fas fa-plus-circle"></span> Novo Briefing</a>
+					<Link className="btn btn-primary col-lg-12" to="/new_briefing"><span className="fas fa-plus-circle"></span> Novo Briefing</Link>
 					<div>
 						{briefings.loading && <em>Loading briefings...</em>}
 						{briefings.error && <span className="txt-danger">Error: {briefings.error}</span>}
