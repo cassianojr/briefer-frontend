@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import {Router, Link, Route } from 'react-router-dom';
 import { Home } from '../../pages/Home';
+
+import { history } from '../../helpers';
+
 import { Briefing } from '../../pages/Briefing';
 
 export default class SideMenu extends Component {
 	render() {
 		return (
-			<Router>
+			<Router history={history}>
 				<div>
 					<nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="sideNav">
 						<Link className="navbar-brand js-scroll-trigger" to={'/'}>

@@ -9,7 +9,11 @@ class BriefingItem extends Component {
 
 		const { briefing } = this.props;
 		const { _id } = briefing;
-		const time_goal = new Date(briefing.budget.time_goal).toLocaleDateString();
+		const time_goal = new Date(briefing.budget.time_goal).toLocaleDateString().slice(0, 10);
+		
+		const briefingToEdit = Object.assign({}, briefing);
+		briefingToEdit.budget.time_goal = briefing.budget.time_goal.slice(0, 10);
+		
 		return (
 			<div className="card" style={{ marginTop: '20px' }}>
 				<h5 className="card-header">{briefing.proj_title}</h5>
@@ -19,11 +23,11 @@ class BriefingItem extends Component {
 					<p className="card-text"><b>Prazo: </b>{time_goal}</p>
 
 					<button className="btn btn-success" data-toggle="modal" data-target="#viewBriefing"><span className="fas fa-eye"> </span> Visualizar </button>&nbsp;
-					<button className="btn btn-warning" data-toggle="modal" data-target="#editBriefing"><span className="fas fa-pencil-alt"> </span> Editar </button>&nbsp;
+					<button className="btn btn-warning" data-toggle="modal" data-target={`#edit-${briefing._id}`}><span className="fas fa-pencil-alt"> </span> Editar </button>&nbsp;
 					<button className="btn btn-danger" onClick={this.props.deleteBriefing.bind(this, _id)}><span className="far fa-trash-alt"></span> Remover</button>
 
 					<BriefingModal briefing={briefing} />
-					<EditModal briefing={briefing}/>
+					<EditModal briefing={briefingToEdit}/>
 				</div>
 			</div>
 		)

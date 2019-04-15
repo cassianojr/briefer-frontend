@@ -33,7 +33,7 @@ export function briefings(state = {}, action) {
 			}
 		case briefingConstants.UPDATE_SUCCESS:
 			return {
-				success: true,
+				success_upd: true,
 				briefing: action.briefing
 			}
 		case briefingConstants.UPDATE_FAILURE:

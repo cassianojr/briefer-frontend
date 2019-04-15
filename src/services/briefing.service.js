@@ -29,7 +29,7 @@ function update(briefing){
 		body: JSON.stringify(briefing)
 	}
 
-	return fetch('/api/briefings', requestOptions).then(handleResponse);
+	return fetch('/api/briefings/update', requestOptions).then(handleResponse);
 }
 
 function deleteBriefing(_id){

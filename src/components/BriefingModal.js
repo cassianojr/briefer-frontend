@@ -23,6 +23,9 @@ function BriefingModal(props) {
 						<p><b>Numero de Páginas: </b>{briefing.num_pages}</p>
 						<p><b>Descrição: </b>{briefing.description}</p>
 						<p><b>Prazo: </b>{time_goal}</p>
+						<p><b>Possui Logo: </b>{(briefing.has_logo) ? "Sim": "Não"}</p>
+						<p><b>Possui Identidade Visual: </b>{(briefing.has_visual) ? "Sim": "Não"}</p>
+						<p><b>Possui um site que precise de redesing: </b>{(briefing.has_current) ? "Sim": "Não"}</p>
 					</div>
 					<div className="modal-footer">
 						<button type="button" className="btn btn-primary" data-dismiss="modal">Fechar</button>
