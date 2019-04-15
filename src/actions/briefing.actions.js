@@ -15,6 +15,11 @@ const getAll = () => dispatch => {
 	function failure(error) { return { type: briefingConstants.GETALL_FAILURE, error } }
 }
 
+const search = (searchTerm) => dispatch => {
+	
+	return dispatch({ type: briefingConstants.SEARCH, searchTerm });
+}
+
 const create = (briefing) => dispatch => {
 	dispatch(request(briefing));
 
@@ -33,11 +38,11 @@ const update = (briefing) => dispatch => {
 	dispatch(request(briefing));
 
 	briefingService.update(briefing)
-	.then(briefing => {
-		history.push('/update_briefing');
-		history.push('/');
-		dispatch(success(briefing));
-	}).catch(error=> dispatch(failure(error)));
+		.then(briefing => {
+			history.push('/update_briefing');
+			history.push('/');
+			dispatch(success(briefing));
+		}).catch(error => dispatch(failure(error)));
 
 	function request(briefing) { return { type: briefingConstants.UPDATE_REQUEST, briefing } }
 	function success(briefing) { return { type: briefingConstants.UPDATE_SUCCESS, briefing } }
@@ -62,5 +67,6 @@ export const briefingActions = {
 	getAll,
 	create,
 	update,
-	deleteBriefing
+	deleteBriefing,
+	search
 }

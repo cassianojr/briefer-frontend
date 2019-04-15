@@ -15,6 +15,13 @@ class Home extends Component {
 		this.state = {
 			userName: user.name
 		}
+
+		this.search = this.search.bind(this);
+	}
+
+	search(e) {
+
+		this.props.dispatch(briefingActions.search(e.target.value));
 	}
 
 	deleteBriefing = (id_briefing) => {
@@ -26,6 +33,7 @@ class Home extends Component {
 	}
 
 	render() {
+
 		const { briefings } = this.props;
 		if (briefings.success_upd) {
 			const body = document.body,
@@ -34,15 +42,18 @@ class Home extends Component {
 			modalBackdrop.parentNode.removeChild(modalBackdrop);
 		}
 
+		const briefingItems = !(briefings.filteredBriefings) ? briefings.items : briefings.filteredBriefings;
+
+
 		return (
 			<div className="container">
 				<div className="col-lg-11 float-right">
 					<h1 style={{ textAlign: 'center' }}>Bem vindo {this.state.userName}</h1>
 					<div className="col-lg-12">
-						<div className="row">
-							<input type="text" className="form-control col-lg-8" id="proj_title" name="search" placeholder="Pesquisar por briefing" />
-							<button className="btn btn-primary" style={{marginLeft: '5px'}}><span className="fas fa-search" /> Pesquisar</button>
-							<Link className="btn btn-primary"  style={{marginLeft: '12px'}} to="/new_briefing"><span className="fas fa-plus-circle"></span> Novo Briefing</Link>
+						<div className="row form-group has-search">
+							<span className="fa fa-search form-control-feedback"  ></span>
+							<input type="text" className="form-control col-lg-9" placeholder="Pesquisar por briefing" name="search" onChange={this.search} />
+							<Link className="btn btn-primary" style={{ marginLeft: '62px' }} to="/new_briefing"><span className="fas fa-plus-circle"></span> Novo Briefing</Link>
 						</div>
 					</div>
 					<div>
@@ -50,7 +61,7 @@ class Home extends Component {
 						{briefings.error && <span className="txt-danger">Error: {briefings.error}</span>}
 						{briefings.items &&
 							<div>
-								{briefings.items.map(briefing =>
+								{briefingItems.map(briefing =>
 									<BriefingItem key={briefing._id} deleteBriefing={this.deleteBriefing} briefing={briefing} />
 								)}
 							</div>
