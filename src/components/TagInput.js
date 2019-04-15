@@ -48,6 +48,15 @@ class TagInput extends Component {
 
 	}
 
+	componentWillMount(){
+		const {tags} = this.props;
+		const tagsObj = tags.map(tag=>{
+			return {id: tag, text: tag}
+		});
+
+		this.setState({tags: tagsObj});
+	}
+
 	render() {
 		const { tags } = this.state;
 		return (

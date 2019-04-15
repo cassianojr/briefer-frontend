@@ -24,10 +24,16 @@ class Home extends Component {
 	componentDidMount() {
 		this.props.dispatch(briefingActions.getAll());
 	}
-
+	
 	render() {
 		const { briefings } = this.props;
-		console.log(this.props);
+		if(briefings.success_upd){
+			const body = document.body,
+			modalBackdrop = document.querySelector('.modal-backdrop');
+			body.classList.remove('modal-open');
+			modalBackdrop.parentNode.removeChild(modalBackdrop);
+		}
+
 		return (
 			<div className="container">
 				<div className="col-lg-11 float-right">

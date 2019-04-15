@@ -24,20 +24,22 @@ class Briefing extends Component {
 			time_goal: '',
 			cost: '',
 			features: []
-		}
+		},
+		operation: 'CREATE'
 	}
 
 	constructor(props) {
 		super(props);
 
 		this.state = {
-	
+
 		};
 
 		this.handleChange = this.handleChange.bind(this);
+		this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
 	}
 
-	componentDidMount(){
+	componentWillMount() {
 		this.setState(this.props.briefing);
 	}
 
@@ -54,6 +56,13 @@ class Briefing extends Component {
 		this.setState({ [name]: value });
 	}
 
+	handleCheckboxChange(e){
+		const { name, value } = e.target;
+		this.setState({ [name]: (value === "on")});
+		console.log(this.state);
+		
+	}
+
 	onSubmit = (e) => {
 		var form = document.querySelector('.form-briefing');
 
@@ -65,21 +74,28 @@ class Briefing extends Component {
 			time_goal: briefing.time_goal,
 			cost: briefing.cost
 		}
-		if(form.checkValidity() !== false){
-			this.props.dispatch(briefingActions.create(briefing));
+		if (form.checkValidity() !== false) {
+			if (this.props.operation === 'CREATE') {
+				this.props.dispatch(briefingActions.create(briefing));
+			} else {
+				console.log(briefing);
+				this.props.dispatch(briefingActions.update(briefing));
+
+			}
 		}
 
 		form.classList.add('was-validated');
 	}
 	render() {
-
 		return (
 			<div className="container">
-				{/* {this.props.sidebar} */}
-
 				<div className="col-lg-11 float-right">
-					<h3 className="mb-3">Criar novo Briefing</h3>
-
+					{(
+						this.props.operation === 'CREATE') ?
+						<h3 className="mb-3">Criar novo Briefing</h3>
+						:
+						<h3 className="mb-3">Editar Briefing</h3>
+					}
 					<form className="needs-validation form-briefing" onSubmit={this.onSubmit} noValidate>
 						<div className="mb-3">
 							<label htmlFor="proj_title">Nome do Projeto</label>
@@ -156,19 +172,19 @@ class Briefing extends Component {
 						<div className="mb-3">
 							<label htmlFor="features">Quais são as características principais do projeto?</label>
 							<label htmlFor="features"><span className="text-muted">(Ex.: Fácil Manutenção, Conteúdo Dinâmico)</span></label>
-							<TagInput changeTag={this.changetag} />
+							<TagInput changeTag={this.changetag} tags={this.state.features} />
 						</div>
 
 						<div className="custom-control custom-checkbox">
-							<input type="checkbox" name="has_visual" className="custom-control-input" id="has_visual" value={this.state.has_visual} onChange={this.handleChange} />
+							<input type="checkbox" name="has_visual" className="custom-control-input" id="has_visual" checked={this.state.has_visual} onChange={this.handleCheckboxChange} />
 							<label className="custom-control-label" htmlFor="has_visual">Possui Identidade visual. (Ex.: Mockup, wireframe)</label>
 						</div>
 						<div className="custom-control custom-checkbox">
-							<input type="checkbox" name="has_logo" className="custom-control-input" id="has_logo" value={this.state.has_logo} onChange={this.handleChange} />
+							<input type="checkbox" name="has_logo" className="custom-control-input" id="has_logo" checked={this.state.has_logo} onChange={this.handleCheckboxChange} />
 							<label className="custom-control-label" htmlFor="has_logo">Possui uma logo.</label>
 						</div>
 						<div className="custom-control custom-checkbox">
-							<input type="checkbox" name="has_current" className="custom-control-input" id="has_current" value={this.state.has_current} onChange={this.handleChange} />
+							<input type="checkbox" name="has_current" className="custom-control-input" id="has_current" checked={this.state.has_current} onChange={this.handleCheckboxChange} />
 							<label className="custom-control-label" htmlFor="has_current">Já possui um site que deseja fazer redesign/dar manutenção.</label>
 						</div>
 						<div className="row">
@@ -189,7 +205,12 @@ class Briefing extends Component {
 							</div>
 						</div>
 						<hr className="mb-4" />
-						<button className="btn btn-primary btn-lg btn-block" type="submit"><span className="fas fa-plus-circle"></span> Criar Briefing</button>
+						{
+							(this.props.operation === 'CREATE') ?
+								<button className="btn btn-primary btn-lg btn-block" type="submit"><span className="fas fa-plus-circle"></span> Criar Briefing</button>
+								:
+								<button className="btn btn-primary btn-lg btn-block" type="submit" ><span className="fas fa-plus-circle"></span> Editar Briefing</button>
+						}
 						<br />
 					</form>
 

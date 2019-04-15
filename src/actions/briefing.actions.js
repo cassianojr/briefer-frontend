@@ -34,6 +34,8 @@ const update = (briefing) => dispatch => {
 
 	briefingService.update(briefing)
 	.then(briefing => {
+		history.push('/update_briefing');
+		history.push('/');
 		dispatch(success(briefing));
 	}).catch(error=> dispatch(failure(error)));
 
