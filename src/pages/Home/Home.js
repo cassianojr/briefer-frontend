@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
 import { briefingActions } from '../../actions';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import BriefingItem from '../../components/BriefingItem';
 
 class Home extends Component {
 
-	constructor(props){
+	constructor(props) {
 		super(props);
 
 		const user = JSON.parse(localStorage.getItem("user"));
@@ -17,19 +17,19 @@ class Home extends Component {
 		}
 	}
 
-	deleteBriefing = (id_briefing)=>{
+	deleteBriefing = (id_briefing) => {
 		this.props.dispatch(briefingActions.deleteBriefing(id_briefing));
 	}
 
 	componentDidMount() {
 		this.props.dispatch(briefingActions.getAll());
 	}
-	
+
 	render() {
 		const { briefings } = this.props;
-		if(briefings.success_upd){
+		if (briefings.success_upd) {
 			const body = document.body,
-			modalBackdrop = document.querySelector('.modal-backdrop');
+				modalBackdrop = document.querySelector('.modal-backdrop');
 			body.classList.remove('modal-open');
 			modalBackdrop.parentNode.removeChild(modalBackdrop);
 		}
@@ -37,8 +37,14 @@ class Home extends Component {
 		return (
 			<div className="container">
 				<div className="col-lg-11 float-right">
-					<h1 style={{textAlign: 'center'}}>Bem vindo {this.state.userName}</h1>
-					<Link className="btn btn-primary col-lg-12" to="/new_briefing"><span className="fas fa-plus-circle"></span> Novo Briefing</Link>
+					<h1 style={{ textAlign: 'center' }}>Bem vindo {this.state.userName}</h1>
+					<div className="col-lg-12">
+						<div className="row">
+							<input type="text" className="form-control col-lg-8" id="proj_title" name="search" placeholder="Pesquisar por briefing" />
+							<button className="btn btn-primary" style={{marginLeft: '5px'}}><span className="fas fa-search" /> Pesquisar</button>
+							<Link className="btn btn-primary"  style={{marginLeft: '12px'}} to="/new_briefing"><span className="fas fa-plus-circle"></span> Novo Briefing</Link>
+						</div>
+					</div>
 					<div>
 						{briefings.loading && <em>Loading briefings...</em>}
 						{briefings.error && <span className="txt-danger">Error: {briefings.error}</span>}
