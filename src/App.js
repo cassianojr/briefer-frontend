@@ -20,6 +20,8 @@ class App extends Component {
         <Router history={history}>
           <div>
             <PrivateRoute exact path="/" component={SideMenu}/>
+            <PrivateRoute exact path="/profile" component={SideMenu}/>
+            <PrivateRoute exact path="/new_briefing" component={SideMenu}/>
             <Route exact path="/login" component={SignIn} />
             <Route exact path="/sign-up" component={SignUp} />
           </div>

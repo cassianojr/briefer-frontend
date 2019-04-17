@@ -29,7 +29,7 @@ class SignUp extends Component {
 	}
 
 	onSubmit = (e) => {
-		var form = document.querySelector('.form-sign-up');
+		const form = document.querySelector('.form-sign-up');
 		e.preventDefault();
 		e.stopPropagation();
 

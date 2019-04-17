@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import { Home } from '../../pages/Home';
 
 import { Briefing } from '../../pages/Briefing';
+import { Profile } from '../../pages/Profile';
 
 export default class SideMenu extends Component {
 	render() {
@@ -36,7 +37,8 @@ export default class SideMenu extends Component {
 					</nav>
 					<div>
 						<Route path={'/'} exact component={Home} />
-						<Route path={'/new_briefing'} component={Briefing} />
+						<Route path={'/new_briefing'} exact component={Briefing} />
+						<Route path={'/profile'}exact component={Profile} />
 					</div>
 				</div>
 			</Router>
