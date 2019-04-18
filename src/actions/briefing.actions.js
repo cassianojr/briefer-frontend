@@ -26,6 +26,7 @@ const create = (briefing) => dispatch => {
 	briefingService.create(briefing)
 		.then(briefing => {
 			dispatch(success(briefing));
+			history.push('/create_briefing');
 			history.push('/');
 		}).catch(error => dispatch(failure(error)));
 

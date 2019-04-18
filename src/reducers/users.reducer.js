@@ -14,6 +14,18 @@ export function users(state = {}, action) {
 			};
 		case userConstants.CREATE_FAILURE:
 			return {};
+		case userConstants.UPDATE_REQUEST:
+			return {
+				updating: true,
+				user: action.user
+			}
+		case userConstants.UPDATE_SUCCESS:
+			return {
+				updated: true,
+				user: action.user
+			}
+		case userConstants.UPDATE_FAILURE:
+			return {}
 		case userConstants.EMAIL_VERIFY_REQUEST:
 			return {
 				loading: true

@@ -1,6 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-export default class Profile extends Component {
+import { connect } from 'react-redux';
+import { userActions } from '../../actions';
+
+class Profile extends Component {
 	constructor(props) {
 		super(props);
 
@@ -15,6 +18,10 @@ export default class Profile extends Component {
 			confirm_password: '',
 		}
 
+		this.oldPasswordField = React.createRef();
+		this.newPasswordField = React.createRef();
+		this.confirmPasswordField = React.createRef();
+
 		this.onChange = this.onChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
 	}
@@ -24,11 +31,33 @@ export default class Profile extends Component {
 		this.setState({ [name]: value });
 	}
 
-	onSubmit(e){
-		const form = document.querySelector('.form-sign-up');
+	onSubmit(e) {
+		const form = document.querySelector('.from-profile');
 		e.preventDefault();
 		e.stopPropagation();
 
+		const { name, email, old_password, new_password, confirm_password } = this.state,
+			user = { name, email, old_password, new_password, confirm_password };
+
+		const {dispatch} = this.props;
+
+		//passwords validation
+		if (new_password !== '' && confirm_password !== '') {
+			if (old_password === '') {
+				this.oldPasswordField.current.setCustomValidity("You need to type the old password.");
+			}
+
+			if (new_password !== confirm_password) {
+				this.newPasswordField.current.setCustomValidity("Passwords don't match");
+				this.confirmPasswordField.current.setCustomValidity("Passwords don't match");
+			}
+		}
+
+		if (form.checkValidity() !== false) {
+			dispatch(userActions.update(user));
+		}
+
+		form.classList.add('was-validated');
 	}
 
 	render() {
@@ -51,21 +80,21 @@ export default class Profile extends Component {
 
 						<div className="col-md-12 mb-3">
 							<label htmlFor="password">Senha Antiga</label>
-							<input type="password" name="old_password" value={state.password} onChange={this.onChange} className="form-control" id="old-password" />
+							<input type="password" ref={this.oldPasswordField} name="old_password" value={state.password} onChange={this.onChange} className="form-control" id="old-password" />
 							<div className="invalid-feedback">
 								Digite uma senha válida
 							</div>
 						</div>
 						<div className="col-md-12 mb-3">
 							<label htmlFor="password">Senha Nova</label>
-							<input type="password" name="new_password" value={state.password} onChange={this.onChange} className="form-control" id="new-password" />
+							<input type="password" ref={this.newPasswordField} name="new_password" value={state.password} onChange={this.onChange} className="form-control" id="new-password" />
 							<div className="invalid-feedback">
 								As senhas não correspondem.
 							</div>
 						</div>
 						<div className="col-md-12 mb-3">
 							<label htmlFor="password">Confirmar Senha Nova</label>
-							<input type="password" name="confirm_password" value={state.password} onChange={this.onChange} className="form-control" id="confirm-password" />
+							<input type="password" ref={this.confirmPasswordField} name="confirm_password" value={state.password} onChange={this.onChange} className="form-control" id="confirm-password" />
 							<div className="invalid-feedback">
 								As senhas não correspondem.
 							</div>
@@ -75,6 +104,17 @@ export default class Profile extends Component {
 					</form>
 				</div>
 			</div>
-		)
+		);
 	}
 }
+const mapStateToProps = state => {
+	const { authentication, users } = state;
+	const { user } = authentication;
+
+	return {
+		user,
+		users
+	}
+}
+
+export default connect(mapStateToProps)(Profile);

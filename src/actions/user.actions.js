@@ -41,8 +41,8 @@ const create = (user) => dispatch => {
 
 	userService.create(user)
 		.then(user => {
-			history.push('/');
 			dispatch(success(user));
+			history.push('/');
 		}).catch(error => {
 			dispatch(failure(error));
 		});
@@ -52,9 +52,24 @@ const create = (user) => dispatch => {
 	function failure(user) { return { type: userConstants.CREATE_FAILURE, user } }
 }
 
+const update = (user) => dispatch => {
+	dispatch(request(user));
+
+	userService.update(user)
+		.then(user => {
+			dispatch(success(user));
+			history.push('/login');
+		}).catch(error => dispatch(failure(error)));
+
+	function request(user) { return { type: userConstants.UPDATE_REQUEST, user } }
+	function success(user) { return { type: userConstants.UPDATE_SUCCESS, user } }
+	function failure(user) { return { type: userConstants.UPDATE_FAILURE, user } }
+}
+
 export const userActions = {
 	login,
 	logout,
 	create,
+	update,
 	verifyIfEmailExists
 };

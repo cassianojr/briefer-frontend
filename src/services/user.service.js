@@ -5,6 +5,7 @@ export const userService = {
 	logout,
 	getAll,
 	create,
+	update,
 	verifyIfEmailExists
 };
 
@@ -45,6 +46,19 @@ function create(user) {
 		.then(user => {
 			return user;
 		});
+}
+
+function update(user){
+	const requestOptions = {
+		method: 'PUT',
+		headers: authHeader(),
+		body: JSON.stringify(user)
+	}
+
+	return fetch('/api/users/update', requestOptions)
+	.then(user=> {
+		return user
+	});
 }
 
 function logout() {
