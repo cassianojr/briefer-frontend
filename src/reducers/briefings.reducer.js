@@ -54,8 +54,6 @@ export function briefings(state = {}, action) {
 				success: false
 			};
 		case briefingConstants.SEARCH:
-
-		
 		
 		const test = Object.assign({}, state, {
 			filteredBriefings: state.items.filter(briefing => briefing.proj_title.includes(action.searchTerm))

@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 
 import BriefingItem from '../../components/BriefingItem';
 
+import { Notify } from 'react-redux-notify';
+
 class Home extends Component {
 
 	constructor(props) {
@@ -18,7 +20,6 @@ class Home extends Component {
 
 		this.search = this.search.bind(this);
 	}
-
 	search(e) {
 
 		this.props.dispatch(briefingActions.search(e.target.value));
@@ -48,6 +49,7 @@ class Home extends Component {
 		return (
 			<div className="container">
 				<div className="col-lg-11 float-right">
+					<Notify position={'BottomRight'}/>
 					<h1 style={{ textAlign: 'center' }}>Bem vindo {this.state.userName}</h1>
 					<div className="col-lg-12">
 						<div className="row form-group has-search">
@@ -78,4 +80,11 @@ const mapStateToProps = state => {
 	return { briefings };
 }
 
-export default connect(mapStateToProps)(Home);
+// const mapDispatchToProps = dispatch => {
+// 	return {
+// 		createNotification: (config) => {
+// 			dispatch(createNotification(config))
+// 		}
+// 	}
+// }
+	export default connect(mapStateToProps)(Home);
