@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 
-import {BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import { Home } from '../../pages/Home';
 
 import { Briefing } from '../../pages/Briefing';
 import { Profile } from '../../pages/Profile';
+
+import logo from '../img/logo.png';
 
 export default class SideMenu extends Component {
 	render() {
@@ -12,7 +14,12 @@ export default class SideMenu extends Component {
 			<Router>
 				<div>
 					<nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="sideNav">
-						<Link className="navbar-brand js-scroll-trigger" to={'/'}>
+						<a className="navbar-brand" href="/">
+							<span className="d-none d-lg-block">
+								<img className="img-fluid img-profile" src={logo} alt="" />
+							</span>
+						</a>
+						<Link className="navbar-brand" to={'/'}>
 							<span className="d-block d-lg-none">Briefer</span>
 						</Link>
 						<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,8 +45,10 @@ export default class SideMenu extends Component {
 					<div>
 						<Route path={'/'} exact component={Home} />
 						<Route path={'/new_briefing'} exact component={Briefing} />
-						<Route path={'/profile'}exact component={Profile} />
+						<Route path={'/profile'} exact component={Profile} />
 					</div>
+					<div className="d-lg-none d-sm-block" style={{marginTop: '35px'}}></div>
+
 				</div>
 			</Router>
 		);

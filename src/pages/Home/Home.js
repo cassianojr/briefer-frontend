@@ -8,6 +8,8 @@ import BriefingItem from '../../components/BriefingItem';
 
 import { Notify } from 'react-redux-notify';
 
+import Footer from '../../components/layout/Footer';
+
 class Home extends Component {
 
 	constructor(props) {
@@ -49,13 +51,14 @@ class Home extends Component {
 		return (
 			<div className="container">
 				<div className="col-lg-11 float-right">
-					<Notify position={'BottomRight'}/>
-					<h1 style={{ textAlign: 'center' }}>Bem vindo {this.state.userName}</h1>
+					<Notify position={'BottomRight'} />
 					<div className="col-lg-12">
 						<div className="row form-group has-search">
-							<span className="fa fa-search form-control-feedback"  ></span>
-							<input type="text" className="form-control col-lg-9" placeholder="Pesquisar por briefing" name="search" onChange={this.search} />
-							<Link className="btn btn-primary" style={{ marginLeft: '62px' }} to="/new_briefing"><span className="fas fa-plus-circle"></span> Novo Briefing</Link>
+							<div className="col-lg-9 col-sm-9 col-10 form-search">
+								<span className="fa fa-search form-control-feedback"></span>
+								<input type="text" className="form-control " placeholder="Pesquisar por briefing" name="search" onChange={this.search} />
+							</div>
+							<Link className="btn btn-primary col-lg-3 col-2 col-sm-3" to="/new_briefing"><span className="fas fa-plus-circle"></span> <span className="d-none d-sm-inline">Novo Briefing</span></Link>
 						</div>
 					</div>
 					<div>
@@ -70,6 +73,7 @@ class Home extends Component {
 						}
 					</div>
 				</div>
+				<Footer />
 			</div>
 		)
 	}
@@ -80,11 +84,4 @@ const mapStateToProps = state => {
 	return { briefings };
 }
 
-// const mapDispatchToProps = dispatch => {
-// 	return {
-// 		createNotification: (config) => {
-// 			dispatch(createNotification(config))
-// 		}
-// 	}
-// }
-	export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(Home);
