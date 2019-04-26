@@ -213,7 +213,6 @@ class Briefing extends Component {
 						}
 						<br />
 					</form>
-
 				</div>
 			</div>
 		)

@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="theme-color" content="#000000" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
@@ -11,9 +11,9 @@
     integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  
-<link rel="stylesheet" href="https://unpkg.com/react-redux-notify/dist/ReactReduxNotify.min.css">
-  
+
+  <link rel="stylesheet" href="https://unpkg.com/react-redux-notify/dist/ReactReduxNotify.min.css">
+
   <style>
     html,
     body {
@@ -21,7 +21,6 @@
     }
 
     body {
-
       padding-top: 40px;
       padding-bottom: 40px;
     }
@@ -29,13 +28,18 @@
     #sideNav .navbar-nav .nav-item .nav-link {
       font-weight: 800;
       letter-spacing: .05rem;
-      text-transform: uppercase
+      text-transform: uppercase;
     }
 
     /* Bootstrap 4 text input with search icon */
 
     .has-search .form-control {
       padding-left: 2.375rem;
+    }
+
+    .form-search {
+      padding-left: 0;
+      margin-left: 0;
     }
 
     .has-search .form-control-feedback {
@@ -50,8 +54,23 @@
       color: #aaa;
     }
 
+    /* navbar */
+    .navbar-dark {
+      background-color: #24527a !important;
+    }
+
+    .footer {
+      
+      bottom: 0;
+      width: 75%;
+      height: 0px;
+      /* Set the fixed height of the footer here */
+      /* line-height: 80px; */
+    }
+
     @media (min-width:992px) {
       #sideNav {
+        text-align: left;
         position: fixed;
         top: 0;
         left: 0;
@@ -66,18 +85,21 @@
         height: 100vh
       }
 
+      .footer{
+        position: absolute;
+      }
+
       #sideNav .navbar-brand {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
-        margin: auto auto 0;
+        margin: 20% auto 15%;
         padding: .5rem
       }
 
       #sideNav .navbar-brand .img-profile {
         max-width: 10rem;
         max-height: 10rem;
-        border: .5rem solid rgba(255, 255, 255, .2)
       }
 
       #sideNav .navbar-collapse {
@@ -99,6 +121,8 @@
         -webkit-box-direction: normal;
         -ms-flex-direction: column;
         flex-direction: column;
+        margin-top: -100px;
+        padding-top: 0;
         width: 100%
       }
 
@@ -127,8 +151,6 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
     integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
-
-    <!-- <script src="https://unpkg.com/react-redux-notify/dist/ReactReduxNotify.min.js"></script> -->
 </body>
 
 </html>
