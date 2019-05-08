@@ -34,7 +34,7 @@ const create = (briefing) => dispatch => {
 		.then(briefing => {
 			dispatch(success(briefing));
 			history.push('/create_briefing');
-			history.push('/');
+			history.push('/briefs');
 		}).catch(error => dispatch(failure(error)));
 
 	function request(briefing) { return { type: briefingConstants.CREATE_REQUEST, briefing } }
@@ -58,7 +58,7 @@ const update = (briefing) => dispatch => {
 	briefingService.update(briefing)
 		.then(briefing => {
 			history.push('/update_briefing');
-			history.push('/');
+			history.push('/briefs');
 			dispatch(success(briefing));
 		}).catch(error => dispatch(failure(error)));
 
@@ -84,7 +84,7 @@ const deleteBriefing = (id_briefing) => dispatch => {
 		.then(briefing => {
 			dispatch(success(briefing));
 			history.push('/delete_briefing');
-			history.push('/');
+			history.push('/briefs');
 		}).catch(error => dispatch(failure(error)));
 
 	function request(id_briefing) { return { type: briefingConstants.DELETE_REQUEST, id_briefing } }

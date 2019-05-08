@@ -8,9 +8,7 @@ import BriefingItem from '../../components/BriefingItem';
 
 import { Notify } from 'react-redux-notify';
 
-import Footer from '../../components/layout/Footer';
-
-class Home extends Component {
+class Briefs extends Component {
 
 	constructor(props) {
 		super(props);
@@ -49,7 +47,7 @@ class Home extends Component {
 
 
 		return (
-			<div className="container">
+			<div className="container" style={{marginTop: '50px'}}>
 				<div className="col-lg-11 float-right">
 					<Notify position={'BottomRight'} />
 					<div className="col-lg-12">
@@ -73,7 +71,6 @@ class Home extends Component {
 						}
 					</div>
 				</div>
-				<Footer />
 			</div>
 		)
 	}
@@ -84,4 +81,4 @@ const mapStateToProps = state => {
 	return { briefings };
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(Briefs);

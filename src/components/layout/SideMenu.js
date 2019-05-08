@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
-import { Home } from '../../pages/Home';
+import { Briefs } from '../../pages/Briefs';
 
 import { Briefing } from '../../pages/Briefing';
 import { Profile } from '../../pages/Profile';
@@ -19,7 +19,7 @@ export default class SideMenu extends Component {
 								<img className="img-fluid img-profile" src={logo} alt="" />
 							</span>
 						</a>
-						<Link className="navbar-brand" to={'/'}>
+						<Link className="navbar-brand" to={'/briefs'}>
 							<span className="d-block d-lg-none">Briefer</span>
 						</Link>
 						<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,13 +37,13 @@ export default class SideMenu extends Component {
 									<Link className="nav-link" to={'/profile'}><i className="fas fa-user-circle"></i> Meu Perfil</Link>
 								</li>
 								<li className="nav-item">
-									<a className="nav-link" href='/login'><i className="fas fa-sign-out-alt"></i> Sair</a>
+									<a className="nav-link" href='/'><i className="fas fa-sign-out-alt"></i> Sair</a>
 								</li>
 							</ul>
 						</div>
 					</nav>
 					<div>
-						<Route path={'/'} exact component={Home} />
+						<Route path={'/briefs'} exact component={Briefs} />
 						<Route path={'/new_briefing'} exact component={Briefing} />
 						<Route path={'/profile'} exact component={Profile} />
 					</div>
