@@ -7,7 +7,7 @@ const login = (email, password) => dispatch => {
 
 	userService.login(email, password)
 		.then(user => {
-			history.push('/');
+			history.push('/briefs');
 			dispatch(success(user));
 		}).catch(error => {
 			dispatch(failure(error));
@@ -42,7 +42,7 @@ const create = (user) => dispatch => {
 	userService.create(user)
 		.then(user => {
 			dispatch(success(user));
-			history.push('/');
+			history.push('/briefs');
 		}).catch(error => {
 			dispatch(failure(error));
 		});
