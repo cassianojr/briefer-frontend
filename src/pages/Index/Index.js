@@ -19,10 +19,16 @@ class Index extends Component {
 						</button>
 
 						<div id="navbar-collapse" className="collapse navbar-collapse">
-							<ul className="navbar-nav ml-auto">
-								<li className="probootstra-cta-button"><a href="/login" className="btn">Entrar</a></li>
-								<li className="probootstra-cta-button last"><a href="/sign-up" className="btn btn-ghost">Cadastre-se</a></li>
-							</ul>
+							{!localStorage.getItem('user') ?
+								<ul className="navbar-nav ml-auto">
+									<li className="probootstra-cta-button"><a href="/login" className="btn">Entrar</a></li>
+									<li className="probootstra-cta-button last"><a href="/sign-up" className="btn btn-ghost">Cadastre-se</a></li>
+
+								</ul>
+								: <ul className="navbar-nav ml-auto">
+									<li className="probootstra-cta-button last"><a href="/briefs" className="btn">Acessar Painel</a></li>
+								</ul>
+							}
 						</div>
 					</div>
 				</nav>
@@ -61,7 +67,7 @@ class Index extends Component {
 									</li>
 								</ul>
 							</div>
-							<div className="col-md-8 col-md-pull-4 probootstrap-animate" style={{position: 'relative'}}>
+							<div className="col-md-8 col-md-pull-4 probootstrap-animate" style={{ position: 'relative' }}>
 								<div className="probootstrap-home-showcase-wrap">
 									<div className="probootstrap-home-showcase-inner">
 										<div className="probootstrap-chrome">

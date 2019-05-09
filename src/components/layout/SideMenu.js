@@ -8,7 +8,22 @@ import { Profile } from '../../pages/Profile';
 
 import logo from '../img/logo.png';
 
-export default class SideMenu extends Component {
+import { connect } from 'react-redux';
+import { userActions } from '../../actions';
+
+class SideMenu extends Component {
+
+	constructor(props) {
+		super(props);
+
+		this.logout = this.logout.bind(this);
+	}
+
+	logout() {
+		const { dispatch } = this.props;
+		dispatch(userActions.logout);
+	}
+
 	render() {
 		return (
 			<Router>
@@ -28,7 +43,7 @@ export default class SideMenu extends Component {
 						<div className="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul className="navbar-nav">
 								<li className="nav-item">
-									<Link className="nav-link" to={'/'}><i className="fas fa-home"></i> Home</Link>
+									<Link className="nav-link" to={'/briefs'}><i className="fas fa-home"></i> Home</Link>
 								</li>
 								<li className="nav-item">
 									<Link className="nav-link" to={'/new_briefing'}><i className="fas fa-plus-circle"></i> Novo Briefing</Link>
@@ -37,7 +52,7 @@ export default class SideMenu extends Component {
 									<Link className="nav-link" to={'/profile'}><i className="fas fa-user-circle"></i> Meu Perfil</Link>
 								</li>
 								<li className="nav-item">
-									<a className="nav-link" href='/'><i className="fas fa-sign-out-alt"></i> Sair</a>
+									<a className="nav-link" onClick={this.logout} href='/'><i className="fas fa-sign-out-alt"></i> Sair</a>
 								</li>
 							</ul>
 						</div>
@@ -47,10 +62,22 @@ export default class SideMenu extends Component {
 						<Route path={'/new_briefing'} exact component={Briefing} />
 						<Route path={'/profile'} exact component={Profile} />
 					</div>
-					<div className="d-lg-none d-sm-block" style={{marginTop: '35px'}}></div>
+					<div className="d-lg-none d-sm-block" style={{ marginTop: '35px' }}></div>
 
 				</div>
 			</Router>
 		);
 	}
 }
+
+const mapStateToProps = state => {
+	const { authentication, users } = state;
+	const { user } = authentication;
+
+	return {
+		user,
+		users
+	}
+}
+
+export default connect(mapStateToProps)(SideMenu);
